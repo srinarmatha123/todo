@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-const API_URL = "http://localhost:8081/tasks";
+const API_URL = "https://todo-au8o.onrender.com/tasks";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -37,6 +37,7 @@ function App() {
   const addTask = async () => {
     if (task.trim() === "") return;
 
+
     try {
       const response = await fetch(API_URL, {
         method: "POST",
@@ -48,6 +49,7 @@ function App() {
           completed: false,
         }),
       });
+
 
       const newTask = await response.json();
 
