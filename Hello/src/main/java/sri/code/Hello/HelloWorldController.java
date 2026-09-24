@@ -7,7 +7,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = {
         "http://localhost:5173",
-        "https://todo-frontend-fp68.onrender.com"
+        "https://todo-frontend-f6p8.onrender.com"
 })
 @RequestMapping("/tasks")
 public class HelloWorldController {
