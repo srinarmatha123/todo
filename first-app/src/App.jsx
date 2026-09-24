@@ -33,58 +33,77 @@ function App() {
     getTasks();
   }, []);
 
-  // ADD task
+  //ADD task
   const addTask = async () => {
-    if (task.trim() === "") return;
+  if (task.trim() === "") return;
 
+  const taskText = task.trim();
 
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          task: task,
-          completed: false,
-        }),
-      });
+  // Clear input immediately
+  setTask("");
 
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        task: taskText,
+        completed: false,
+      }),
+    });
 
-      const newTask = await response.json();
+    const newTask = await response.json();
 
-      setTasks([...tasks, newTask]);
-      setTask("");
-    } catch (error) {
-      console.error("Error adding task:", error);
-    }
-  };
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+
+  } catch (error) {
+    console.error("Error adding task:", error);
+
+    // If server fails, refresh the tasks
+    getTasks();
+  }
+};
 
   // COMPLETE / UNCOMPLETE task
   const toggleTask = async (id, completed, taskText) => {
-    try {
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          task: taskText,
-          completed: !completed,
-        }),
-      });
+  const newCompleted = !completed;
 
-      const updatedTask = await response.json();
+  // Update UI immediately
+  setTasks((prevTasks) =>
+    prevTasks.map((item) =>
+      item.id === id
+        ? { ...item, completed: newCompleted }
+        : item
+    )
+  );
 
-      setTasks(
-        tasks.map((item) =>
-          item.id === id ? updatedTask : item
-        )
-      );
-    } catch (error) {
-      console.error("Error updating task:", error);
-    }
-  };
+  try {
+    await fetch(`${API_URL}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        task: taskText,
+        completed: newCompleted,
+      }),
+    });
+  } catch (error) {
+    console.error("Error updating task:", error);
+
+    // Restore original state if server fails
+    setTasks((prevTasks) =>
+      prevTasks.map((item) =>
+        item.id === id
+          ? { ...item, completed: completed }
+          : item
+      )
+    );
+  }
+};
+  
 
   // START EDIT
   const startEdit = (item) => {
@@ -92,36 +111,44 @@ function App() {
     setEditingTask(item.task);
   };
 
+  //save edit
   // SAVE EDIT
-  const saveEdit = async (id, completed) => {
-    if (editingTask.trim() === "") return;
+const saveEdit = async (id, completed) => {
+  if (editingTask.trim() === "") return;
 
-    try {
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          task: editingTask,
-          completed: completed,
-        }),
-      });
+  const newTaskText = editingTask.trim();
 
-      const updatedTask = await response.json();
+  // Update UI immediately
+  setTasks((prevTasks) =>
+    prevTasks.map((item) =>
+      item.id === id
+        ? { ...item, task: newTaskText }
+        : item
+    )
+  );
 
-      setTasks(
-        tasks.map((item) =>
-          item.id === id ? updatedTask : item
-        )
-      );
+  // Exit edit mode immediately
+  setEditingId(null);
+  setEditingTask("");
 
-      setEditingId(null);
-      setEditingTask("");
-    } catch (error) {
-      console.error("Error editing task:", error);
-    }
-  };
+  try {
+    await fetch(`${API_URL}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        task: newTaskText,
+        completed: completed,
+      }),
+    });
+  } catch (error) {
+    console.error("Error editing task:", error);
+
+    // Refresh if server fails
+    getTasks();
+  }
+};
 
   // CANCEL EDIT
   const cancelEdit = () => {
@@ -130,19 +157,23 @@ function App() {
   };
 
   // DELETE task
-  const deleteTask = async (id) => {
-    try {
-      await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      });
+const deleteTask = async (id) => {
+  // Remove from UI immediately
+  setTasks((prevTasks) =>
+    prevTasks.filter((item) => item.id !== id)
+  );
 
-      setTasks(
-        tasks.filter((item) => item.id !== id)
-      );
-    } catch (error) {
-      console.error("Error deleting task:", error);
-    }
-  };
+  try {
+    await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
+  } catch (error) {
+    console.error("Error deleting task:", error);
+
+    // Refresh if server fails
+    getTasks();
+  }
+};
 
   // FILTER
   const filteredTasks = tasks.filter((item) => {

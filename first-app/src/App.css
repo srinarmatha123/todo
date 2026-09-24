@@ -556,3 +556,13 @@ body {
     height: 36px !important;
   }
 }
+/* Completed task */
+.task-item:has(input[type="checkbox"]:checked) {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+.task-item:has(input[type="checkbox"]:checked) .task-text {
+  color: #15803d;
+  text-decoration: line-through;
+}
