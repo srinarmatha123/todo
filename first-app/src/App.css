@@ -1,850 +1,411 @@
-/* ========================================
-   GLOBAL
-======================================== */
+/* =========================
+   Global
+========================= */
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
   background: #f7f9fc;
   color: #172033;
 }
 
 
-/* ========================================
-   APP BACKGROUND
-======================================== */
+/* =========================
+   Main App
+========================= */
 
 .app {
   min-height: 100vh;
-  padding: 55px 20px;
-
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(37, 99, 235, 0.05),
-      transparent 30%
-    ),
-    #f7f9fc;
+  background: #f7f9fc;
+  padding: 40px 20px;
 }
-
-
-/* ========================================
-   MAIN CONTAINER
-======================================== */
 
 .todo-container {
   width: 100%;
-  max-width: 780px;
+  max-width: 850px;
   margin: 0 auto;
-
-  padding: 40px;
-
   background: #ffffff;
-
   border: 1px solid #e4e7ec;
-  border-radius: 20px;
-
-  box-shadow:
-    0 12px 35px rgba(16, 24, 40, 0.06),
-    0 2px 8px rgba(16, 24, 40, 0.03);
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
 }
 
 
-/* ========================================
-   HEADER
-======================================== */
+/* =========================
+   Header
+========================= */
 
 .header {
-  position: relative;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-bottom: 34px;
-
   text-align: center;
-}
-
-.header > div:first-child {
-  width: 100%;
+  margin-bottom: 30px;
 }
 
 .header h1 {
-  margin: 0;
-
-  color: #172033;
-
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
-
-  letter-spacing: -0.8px;
+  color: #172033;
+  margin-bottom: 8px;
 }
 
 .header p {
-  margin: 9px 0 0;
-
   color: #667085;
-
-  font-size: 14px;
+  font-size: 15px;
 }
-
-
-/* ========================================
-   TASK SUMMARY
-======================================== */
 
 .task-summary {
-  position: absolute;
-
-  right: 0;
-  top: 0;
-
-  width: 68px;
-  height: 68px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 14px;
-
-  background: #eff6ff;
-
-  color: #2563eb;
-
-  border: 1px solid #dbeafe;
-}
-
-.task-summary span {
-  font-size: 23px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.task-summary small {
-  margin-top: 5px;
-
-  color: #4f75c9;
-
-  font-size: 10px;
-  font-weight: 600;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #667085;
 }
 
 
-/* ========================================
-   ADD TASK
-======================================== */
+/* =========================
+   Add Task
+========================= */
 
 .add-task {
   display: flex;
-
+  width: 100%;
   gap: 10px;
-
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .add-task input {
   flex: 1;
-
-  height: 52px;
-
-  padding: 0 16px;
-
+  min-width: 0;
+  padding: 14px 16px;
   border: 1px solid #d0d5dd;
   border-radius: 10px;
-
   outline: none;
-
-  background: #ffffff;
-
+  font-size: 15px;
   color: #172033;
-
-  font-size: 14px;
-
-  transition: all 0.2s ease;
-}
-
-.add-task input::placeholder {
-  color: #98a2b3;
-}
-
-.add-task input:hover {
-  border-color: #b8c0cc;
+  background: #ffffff;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 .add-task input:focus {
   border-color: #2563eb;
-
-  box-shadow:
-    0 0 0 3px rgba(37, 99, 235, 0.10);
+  box-shadow: 0 0 0 3px #eff6ff;
 }
 
-
-/* ========================================
-   ADD BUTTON
-======================================== */
-
 .add-task button {
-  height: 52px;
-
-  padding: 0 23px;
-
   border: none;
   border-radius: 10px;
-
+  padding: 0 20px;
   background: #2563eb;
-
-  color: #ffffff;
-
-  font-size: 14px;
+  color: white;
+  font-size: 15px;
   font-weight: 600;
-
   cursor: pointer;
-
-  transition: all 0.2s ease;
-
-  box-shadow:
-    0 4px 10px rgba(37, 99, 235, 0.18);
+  transition: background 0.2s ease;
 }
 
 .add-task button:hover {
   background: #1d4ed8;
-
-  transform: translateY(-1px);
-
-  box-shadow:
-    0 6px 14px rgba(37, 99, 235, 0.23);
-}
-
-.add-task button:active {
-  transform: translateY(0);
 }
 
 
-/* ========================================
-   FILTERS
-======================================== */
+/* =========================
+   Filters
+========================= */
 
 .filters {
   display: flex;
-  align-items: center;
-
-  gap: 5px;
-
-  margin-bottom: 18px;
-  padding-bottom: 14px;
-
-  border-bottom: 1px solid #eaecf0;
+  gap: 8px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e4e7ec;
+  padding-bottom: 12px;
 }
 
-.filters button {
+.filter-btn {
   border: none;
-
-  padding: 8px 14px;
-
-  border-radius: 8px;
-
   background: transparent;
-
   color: #667085;
-
-  font-size: 13px;
-  font-weight: 500;
-
+  padding: 9px 14px;
+  border-radius: 8px;
   cursor: pointer;
-
-  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.filters button:hover {
+.filter-btn:hover {
   background: #f2f4f7;
-
-  color: #344054;
+  color: #172033;
 }
 
-
-/* Filter count */
-
-.filters button span {
-  display: inline-flex;
-
-  align-items: center;
-  justify-content: center;
-
-  min-width: 20px;
-  height: 19px;
-
-  margin-left: 5px;
-  padding: 0 5px;
-
-  border-radius: 10px;
-
-  background: #f2f4f7;
-
-  color: #667085;
-
-  font-size: 10px;
-}
-
-
-/* Active filter */
-
-.filters .active-filter {
+.filter-btn.active {
   background: #eff6ff;
-
   color: #2563eb;
-
   font-weight: 600;
 }
 
-.filters .active-filter span {
-  background: #dbeafe;
 
-  color: #2563eb;
-}
-
-
-/* ========================================
-   TASK LIST
-======================================== */
+/* =========================
+   Task List
+========================= */
 
 .task-list {
   display: flex;
-
   flex-direction: column;
-
-  gap: 9px;
+  gap: 10px;
 }
-
-
-/* ========================================
-   TASK ITEM
-======================================== */
 
 .task-item {
   display: flex;
-
   align-items: center;
-
   gap: 12px;
-
-  min-height: 59px;
-
-  padding: 10px 12px;
-
+  width: 100%;
+  padding: 15px;
   border: 1px solid #e4e7ec;
-
-  border-radius: 11px;
-
+  border-radius: 12px;
   background: #ffffff;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+  transition: box-shadow 0.2s ease, border 0.2s ease;
 }
 
 .task-item:hover {
   border-color: #d0d5dd;
-
-  box-shadow:
-    0 5px 14px rgba(16, 24, 40, 0.06);
-
-  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 24, 40, 0.05);
 }
 
 
-/* ========================================
-   CHECKBOX
-======================================== */
+/* =========================
+   Checkbox
+========================= */
 
 .task-item input[type="checkbox"] {
-  appearance: none;
-
-  width: 20px;
-  height: 20px;
-
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
-
-  margin: 0;
-
-  border: 1.5px solid #98a2b3;
-
-  border-radius: 50%;
-
-  background: #ffffff;
-
   cursor: pointer;
-
-  position: relative;
-
-  transition: all 0.2s ease;
-}
-
-.task-item input[type="checkbox"]:hover {
-  border-color: #2563eb;
-
-  box-shadow:
-    0 0 0 3px rgba(37, 99, 235, 0.08);
-}
-
-.task-item input[type="checkbox"]:checked {
-  border-color: #2563eb;
-
-  background: #2563eb;
-}
-
-.task-item input[type="checkbox"]:checked::after {
-  content: "";
-
-  position: absolute;
-
-  width: 5px;
-  height: 9px;
-
-  left: 6px;
-  top: 3px;
-
-  border: solid #ffffff;
-
-  border-width: 0 2px 2px 0;
-
-  transform: rotate(45deg);
+  accent-color: #2563eb;
 }
 
 
-/* ========================================
-   TASK TEXT
-======================================== */
+/* =========================
+   Task Text
+========================= */
 
 .task-text {
   flex: 1;
-
   min-width: 0;
-
-  color: #344054;
-
-  font-size: 14px;
-
-  line-height: 1.5;
-
+  font-size: 15px;
+  color: #172033;
   word-break: break-word;
 }
 
-
-/* Completed task */
-
-.task-item.completed {
-  background: #fafafa;
-
-  border-color: #eaecf0;
-}
-
-.task-item.completed .task-text {
-  color: #98a2b3;
-
+.task-text.completed {
   text-decoration: line-through;
-}
-
-
-/* ========================================
-   EDIT BUTTON
-======================================== */
-
-.edit-button {
-  border: none;
-
-  border-radius: 7px;
-
-  padding: 7px 11px;
-
-  background: #eff6ff;
-
-  color: #2563eb;
-
-  font-size: 12px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: all 0.2s ease;
-}
-
-.edit-button:hover {
-  background: #dbeafe;
-
-  color: #1d4ed8;
-}
-
-
-/* ========================================
-   SAVE BUTTON
-======================================== */
-
-.save-button {
-  border: none;
-
-  border-radius: 7px;
-
-  padding: 7px 11px;
-
-  background: #ecfdf3;
-
-  color: #15803d;
-
-  font-size: 12px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: all 0.2s ease;
-}
-
-.save-button:hover {
-  background: #dcfce7;
-}
-
-
-/* ========================================
-   CANCEL BUTTON
-======================================== */
-
-.cancel-button {
-  border: none;
-
-  border-radius: 7px;
-
-  padding: 7px 11px;
-
-  background: #f2f4f7;
-
-  color: #667085;
-
-  font-size: 12px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: all 0.2s ease;
-}
-
-.cancel-button:hover {
-  background: #e4e7ec;
-
-  color: #344054;
-}
-
-
-/* ========================================
-   DELETE BUTTON
-======================================== */
-
-.delete-button {
-  width: 34px;
-  height: 34px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border: none;
-
-  border-radius: 7px;
-
-  background: transparent;
-
   color: #98a2b3;
-
-  font-size: 15px;
-
-  cursor: pointer;
-
-  transition: all 0.2s ease;
-}
-
-.delete-button:hover {
-  background: #fef3f2;
-
-  color: #dc2626;
-
-  transform: scale(1.04);
 }
 
 
-/* ========================================
-   EDIT INPUT
-======================================== */
+/* =========================
+   Edit Input
+========================= */
 
 .edit-input {
   flex: 1;
-
   min-width: 0;
-
-  height: 37px;
-
-  padding: 0 10px;
-
+  padding: 9px 11px;
   border: 1px solid #2563eb;
-
-  border-radius: 7px;
-
+  border-radius: 8px;
   outline: none;
-
-  background: #ffffff;
-
-  color: #344054;
-
-  font-size: 14px;
-
-  box-shadow:
-    0 0 0 3px rgba(37, 99, 235, 0.08);
+  font-size: 15px;
 }
 
 
-/* ========================================
-   EMPTY STATE
-======================================== */
+/* =========================
+   Buttons
+========================= */
+
+.edit-btn,
+.save-btn,
+.cancel-btn,
+.delete-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 11px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.edit-btn {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.edit-btn:hover {
+  background: #dbeafe;
+}
+
+.save-btn {
+  background: #ecfdf3;
+  color: #16a34a;
+}
+
+.save-btn:hover {
+  background: #dcfce7;
+}
+
+.cancel-btn {
+  background: #f2f4f7;
+  color: #667085;
+}
+
+.cancel-btn:hover {
+  background: #e4e7ec;
+}
+
+.delete-btn {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #fee2e2;
+}
+
+
+/* =========================
+   Empty State
+========================= */
 
 .empty-state {
-  padding: 58px 20px;
-
   text-align: center;
-}
-
-.empty-icon {
-  width: 58px;
-  height: 58px;
-
-  margin: 0 auto 16px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #ecfdf3;
-
-  color: #16a34a;
-
-  font-size: 23px;
-  font-weight: 700;
-
-  border: 1px solid #d1fadf;
-}
-
-.empty-state h2 {
-  margin: 0 0 7px;
-
-  color: #344054;
-
-  font-size: 18px;
-}
-
-.empty-state p {
-  margin: 0;
-
+  padding: 40px 20px;
   color: #98a2b3;
-
-  font-size: 13px;
+  font-size: 15px;
 }
 
 
-/* ========================================
-   LOADING / MESSAGE
-======================================== */
+/* =========================
+   Loading
+========================= */
 
-.message {
-  padding: 40px;
-
+.loading {
   text-align: center;
-
-  color: #2563eb;
-
-  font-size: 13px;
+  padding: 30px;
+  color: #667085;
 }
 
 
-/* ========================================
-   FOOTER
-======================================== */
+/* =========================
+   Footer
+========================= */
 
 .footer {
-  display: flex;
-
-  justify-content: space-between;
-
-  margin-top: 19px;
-  padding-top: 15px;
-
-  border-top: 1px solid #eaecf0;
-
+  text-align: center;
+  margin-top: 25px;
   color: #98a2b3;
-
-  font-size: 12px;
+  font-size: 13px;
 }
 
 
-/* ========================================
-   MOBILE
-======================================== */
+/* =========================
+   Mobile
+========================= */
 
 @media (max-width: 600px) {
 
   .app {
-    padding: 20px 10px 30px;
+    padding: 20px 10px;
   }
 
   .todo-container {
-    padding: 25px 16px;
-
-    border-radius: 17px;
+    width: 100%;
+    max-width: none;
+    padding: 22px 12px;
+    border-radius: 14px;
   }
 
   .header {
-    margin-bottom: 27px;
+    margin-bottom: 24px;
   }
 
   .header h1 {
-    font-size: 29px;
+    font-size: 28px;
   }
 
   .header p {
-    font-size: 12px;
+    font-size: 14px;
   }
 
-  .task-summary {
-    position: static;
-
-    width: 56px;
-    height: 56px;
-
-    margin: 16px auto 0;
-
-    border-radius: 13px;
-  }
-
-  .task-summary span {
-    font-size: 19px;
-  }
-
-  .task-summary small {
-    font-size: 9px;
-  }
-
-
-  /* Add task */
-
+  /* Add Task section uses the available width */
   .add-task {
-    flex-direction: column;
+    width: 100%;
+    display: flex;
+    gap: 8px;
   }
 
   .add-task input {
+    flex: 1;
+    min-width: 0;
     width: 100%;
   }
 
   .add-task button {
-    width: 100%;
+    flex-shrink: 0;
+    padding: 0 16px;
   }
-
-
-  /* Filters */
 
   .filters {
+    width: 100%;
     overflow-x: auto;
-
-    scrollbar-width: none;
   }
 
-  .filters::-webkit-scrollbar {
-    display: none;
+  .filter-btn {
+    white-space: nowrap;
   }
-
-  .filters button {
-    flex-shrink: 0;
-
-    padding: 8px 10px;
-
-    font-size: 12px;
-  }
-
-
-  /* Tasks */
 
   .task-item {
+    width: 100%;
+    padding: 13px 10px;
     gap: 9px;
-
-    padding: 9px;
   }
 
   .task-text {
-    font-size: 13px;
+    flex: 1;
+    min-width: 0;
   }
 
-
-  /* Buttons */
-
-  .edit-button,
-  .save-button,
-  .cancel-button {
-    padding: 6px 8px;
-
-    font-size: 11px;
-  }
-
-
-  /* Footer */
-
-  .footer {
-    flex-direction: column;
-
-    gap: 6px;
-
-    text-align: center;
+  .edit-input {
+    flex: 1;
+    min-width: 0;
   }
 }
 
 
-/* ========================================
-   SMALL PHONES
-======================================== */
+/* =========================
+   Small Mobile
+========================= */
 
-@media (max-width: 380px) {
+@media (max-width: 400px) {
+
+  .app {
+    padding: 12px 6px;
+  }
 
   .todo-container {
-    padding: 20px 12px;
+    padding: 20px 10px;
   }
 
-  .header h1 {
-    font-size: 25px;
+  .add-task {
+    gap: 6px;
   }
 
-  .header p {
-    font-size: 11px;
+  .add-task button {
+    padding: 0 13px;
   }
 
-  .task-summary {
-    width: 52px;
-    height: 52px;
-  }
-
-  .task-summary span {
-    font-size: 17px;
-  }
-
-  .edit-button,
-  .save-button,
-  .cancel-button {
-    padding: 5px 7px;
-
-    font-size: 10px;
+  .task-item {
+    padding: 12px 8px;
   }
 }
